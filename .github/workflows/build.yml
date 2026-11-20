@@ -1,0 +1,85 @@
+name: Compilar e validar
+
+on:
+  push:
+    branches: [ "main", "etapa-*" ]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  PLUGINVAL_VERSION: v1.0.4
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows x64
+            os: windows-latest
+            artifact: Breu-Windows
+            cmake_args: -A x64
+            pluginval_zip: pluginval_Windows.zip
+            pluginval_bin: ./pluginval.exe
+          - name: macOS Apple Silicon
+            os: macos-latest
+            artifact: Breu-macOS
+            cmake_args: -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64
+            pluginval_zip: pluginval_macOS.zip
+            pluginval_bin: ./pluginval.app/Contents/MacOS/pluginval
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar (CMake)
+        run: cmake -S . -B build ${{ matrix.cmake_args }}
+
+      - name: Compilar
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Testes automáticos
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      - name: Assinatura ad-hoc (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          codesign --force --deep --sign - build/Breu_artefacts/Release/VST3/Breu.vst3
+          codesign --force --deep --sign - build/Breu_artefacts/Release/Standalone/Breu.app
+
+      - name: pluginval (nível 10)
+        run: |
+          curl -sSL -o pluginval.zip "https://github.com/Tracktion/pluginval/releases/download/${PLUGINVAL_VERSION}/${{ matrix.pluginval_zip }}"
+          unzip -q pluginval.zip
+          ${{ matrix.pluginval_bin }} --strictness-level 10 --validate-in-process --skip-gui-tests \
+            --output-dir pluginval-logs --validate build/Breu_artefacts/Release/VST3/Breu.vst3
+
+      - name: Empacotar
+        run: |
+          mkdir -p dist
+          cp -R build/Breu_artefacts/Release/VST3/Breu.vst3 dist/
+          if [ "${{ runner.os }}" = "macOS" ]; then
+            cp -R build/Breu_artefacts/Release/Standalone/Breu.app dist/
+          else
+            cp build/Breu_artefacts/Release/Standalone/Breu.exe dist/
+          fi
+          cp docs/instalar.md dist/LEIA-ME.md
+
+      - name: Publicar plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist
+
+      - name: Publicar registros do pluginval
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pluginval-${{ matrix.artifact }}
+          path: pluginval-logs
+          if-no-files-found: ignore
