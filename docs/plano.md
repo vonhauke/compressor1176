@@ -21,6 +21,12 @@ refiro-me às seções de lá.
 5. Há simplificações. Cada uma está listada na seção 9 com o custo em
    fidelidade.
 
+## Decisões tomadas
+
+| # | Decisão | Data |
+|---|---|---|
+| D1 | **B — espaço de estados por estágios + régua SPICE.** O circuito inteiro (A) fica como referência offline | 20/11/2026 |
+
 ## Decisões que preciso de você
 
 | # | Decisão | Minha recomendação |
