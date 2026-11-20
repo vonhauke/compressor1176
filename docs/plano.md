@@ -33,6 +33,7 @@ refiro-me às seções de lá.
 | D6 | Nome provisório **"Breu"** (pode mudar até a etapa e) | 20/11/2026 |
 | D7 | Sem ruído de fundo na v1 | 20/11/2026 |
 | D8 | Voz, bateria e baixo: gravações do Pedro; sintetizador e ruído rosa gerados | 20/11/2026 |
+| D9 | **macOS entra na v1**: VST3 + Standalone para Windows (x64) e macOS (Apple Silicon), compilados no GitHub Actions. No Mac o plugin usa assinatura ad-hoc (sem conta paga da Apple); a primeira abertura exige liberar a quarentena. Testes no Ableton: no MacBook | 20/11/2026 |
 
 ## Decisões propostas (histórico)
 
