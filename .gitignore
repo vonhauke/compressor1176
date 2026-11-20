@@ -1,0 +1,11 @@
+build/
+out/
+cmake-build-*/
+.vs/
+.vscode/
+*.user
+_deps/
+*.wav
+!tests/referencia/*.wav
+__pycache__/
+.DS_Store
