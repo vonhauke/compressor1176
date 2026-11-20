@@ -26,8 +26,15 @@ refiro-me às seções de lá.
 | # | Decisão | Data |
 |---|---|---|
 | D1 | **B — espaço de estados por estágios + régua SPICE.** O circuito inteiro (A) fica como referência offline | 20/11/2026 |
+| D2 | **D2a** — transformador de saída com núcleo que satura, sem histerese | 20/11/2026 |
+| D3 | Modos **Normal** e **Alta qualidade**, com a mesma latência nos dois | 20/11/2026 |
+| D4 | **0 dBFS = +22 dBu** (−18 dBFS = +4 dBu = 0 VU) | 20/11/2026 |
+| D5 | **GitHub Actions** (runner Windows) para compilar e rodar o pluginval; o PC do Pedro para testar no Ableton | 20/11/2026 |
+| D6 | Nome provisório **"Breu"** (pode mudar até a etapa e) | 20/11/2026 |
+| D7 | Sem ruído de fundo na v1 | 20/11/2026 |
+| D8 | Voz, bateria e baixo: gravações do Pedro; sintetizador e ruído rosa gerados | 20/11/2026 |
 
-## Decisões que preciso de você
+## Decisões propostas (histórico)
 
 | # | Decisão | Minha recomendação |
 |---|---|---|
