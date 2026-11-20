@@ -35,7 +35,7 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Configurar (CMake)
         run: cmake -S . -B build ${{ matrix.cmake_args }}
@@ -71,14 +71,14 @@ jobs:
           cp docs/instalar.md dist/LEIA-ME.md
 
       - name: Publicar plugin
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.artifact }}
           path: dist
 
       - name: Publicar registros do pluginval
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pluginval-${{ matrix.artifact }}
           path: pluginval-logs

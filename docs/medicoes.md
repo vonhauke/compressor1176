@@ -72,12 +72,11 @@ idêntica à entrada.
 | Salvar e reabrir o estado | todos os 9 parâmetros voltam com o mesmo valor |
 | Faixa mono | processa com ganho unitário |
 | pluginval, nível 5 | passou (Linux) |
-| pluginval, nível 10 | passou (Linux) |
+| pluginval, nível 10 | passou (Linux, e no GitHub Actions: Windows x64 e macOS Apple Silicon) |
+| Testes automáticos no Windows e no macOS | passaram no GitHub Actions (execução nº 1, commit `ef1cd67`) |
 
 ### O que não foi verificado nesta etapa
 
 - Carregar no Ableton (precisa do binário do macOS gerado no GitHub Actions e
   do seu teste no MacBook).
-- pluginval no Windows e no macOS: roda no GitHub Actions; o resultado fica
-  registrado na execução.
 - Uso de CPU: só faz sentido medir quando houver circuito (etapa b).
