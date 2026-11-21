@@ -9,22 +9,25 @@ O plugin é compilado automaticamente no GitHub a cada envio. Para baixar:
 
 ## macOS (Ableton no MacBook)
 
+O pacote `Breu-macOS` traz dois arquivos compactados: `Breu-vst3.zip` (o
+plugin) e `Breu-app.zip` (a versão Standalone). Funciona em Mac Apple Silicon
+e Intel, e também com o Ableton aberto pelo Rosetta.
+
 O plugin é assinado só "ad-hoc" (sem conta paga de desenvolvedor da Apple).
-O macOS bloqueia arquivos assim quando vêm da internet. No Terminal, dentro da
-pasta descompactada:
+No Terminal, troque `PASTA` pelo caminho onde você descompactou o
+`Breu-macOS` (entre aspas, se tiver espaços):
 
 ```bash
+cd "PASTA"
 mkdir -p ~/Library/Audio/Plug-Ins/VST3
-cp -R Breu.vst3 ~/Library/Audio/Plug-Ins/VST3/
+rm -rf ~/Library/Audio/Plug-Ins/VST3/Breu.vst3
+ditto -x -k Breu-vst3.zip ~/Library/Audio/Plug-Ins/VST3/
 xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/Breu.vst3
-xattr -dr com.apple.quarantine Breu.app
+codesign --force --deep --sign - ~/Library/Audio/Plug-Ins/VST3/Breu.vst3
 ```
 
 No Ableton: **Settings → Plug-Ins**, ligue **Use VST3 Plug-in System
 Folders** e clique em **Rescan**. O Breu aparece em Plug-Ins → vonhauke.
-
-`Breu.app` é a versão Standalone: abre sozinha, sem o Ableton, e usa a placa
-de som escolhida nas opções dela.
 
 ## Windows
 
