@@ -24,11 +24,11 @@ FetchContent_MakeAvailable(JUCE)
 # ---------------------------------------------------------------------------
 juce_add_plugin(Breu
     COMPANY_NAME             "vonhauke"
-    BUNDLE_ID                "com.vonhauke.breu"
+    BUNDLE_ID                "com.vonhauke.breu1176"
     PLUGIN_MANUFACTURER_CODE Vonh
     PLUGIN_CODE              Breu
     FORMATS                  VST3 Standalone
-    PRODUCT_NAME             "Breu"
+    PRODUCT_NAME             "Breu1176"
     VST3_CATEGORIES          Fx Dynamics
     IS_SYNTH                 FALSE
     NEEDS_MIDI_INPUT         FALSE
@@ -80,7 +80,7 @@ if(BREU_BUILD_TESTS)
         PRIVATE
             JUCE_WEB_BROWSER=0
             JUCE_USE_CURL=0
-            JucePlugin_Name="Breu"
+            JucePlugin_Name="Breu1176"
             JucePlugin_VersionString="${PROJECT_VERSION}")
     target_link_libraries(BreuTests
         PRIVATE

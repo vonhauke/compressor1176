@@ -1,4 +1,4 @@
-# Breu
+# Breu1176
 
 Plugin compressor (VST3 + Standalone, Windows e macOS) que modela o circuito
 de um compressor FET clássico de 1967, revisão "painel preto" LN Rev E.

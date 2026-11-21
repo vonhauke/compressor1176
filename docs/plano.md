@@ -30,7 +30,7 @@ refiro-me às seções de lá.
 | D3 | Modos **Normal** e **Alta qualidade**, com a mesma latência nos dois | 20/11/2026 |
 | D4 | **0 dBFS = +22 dBu** (−18 dBFS = +4 dBu = 0 VU) | 20/11/2026 |
 | D5 | **GitHub Actions** (runner Windows) para compilar e rodar o pluginval; o PC do Pedro para testar no Ableton | 20/11/2026 |
-| D6 | Nome provisório **"Breu"** (pode mudar até a etapa e) | 20/11/2026 |
+| D6 | Nome **"Breu1176"** (escolhido pelo Pedro; antes era "Breu"). O código interno do plugin continua `Breu` | 20/11/2026 |
 | D7 | Sem ruído de fundo na v1 | 20/11/2026 |
 | D8 | Voz, bateria e baixo: gravações do Pedro; sintetizador e ruído rosa gerados | 20/11/2026 |
 | D9 | **macOS entra na v1**: VST3 + Standalone para Windows (x64) e macOS (Apple Silicon), compilados no GitHub Actions. No Mac o plugin usa assinatura ad-hoc (sem conta paga da Apple); a primeira abertura exige liberar a quarentena. Testes no Ableton: no MacBook | 20/11/2026 |
