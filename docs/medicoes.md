@@ -75,8 +75,15 @@ idêntica à entrada.
 | pluginval, nível 10 | passou (Linux, e no GitHub Actions: Windows x64 e macOS Apple Silicon) |
 | Testes automáticos no Windows e no macOS | passaram no GitHub Actions (execução nº 1, commit `ef1cd67`) |
 
-### O que não foi verificado nesta etapa
+### Teste no Ableton
 
-- Carregar no Ableton (precisa do binário do macOS gerado no GitHub Actions e
-  do seu teste no MacBook).
+- 20/11/2026, Ableton Live 12.4.6 (nativo Apple Silicon), MacBook Pro M4 Max:
+  o registro do Live mostra o Breu carregado com os 9 parâmetros. Pedro
+  confirmou que funciona.
+- O aviso "couldn't get controller state: not implemented" no registro é
+  informativo e aparece também em plugins comerciais (ex.: Splice).
+- Live 10 e Live 11 instalados no Mac são só Intel: a partir do commit
+  `9daf411` o pacote do macOS é universal (Apple Silicon + Intel).
+
+### O que não foi verificado nesta etapa
 - Uso de CPU: só faz sentido medir quando houver circuito (etapa b).

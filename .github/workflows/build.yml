@@ -19,14 +19,14 @@ jobs:
         include:
           - name: Windows x64
             os: windows-latest
-            artifact: Breu-Windows
+            artifact: Breu1176-Windows
             cmake_args: -A x64
             pluginval_zip: pluginval_Windows.zip
             pluginval_bin: ./pluginval.exe
-          - name: macOS Apple Silicon
+          - name: macOS (Apple Silicon + Intel)
             os: macos-latest
-            artifact: Breu-macOS
-            cmake_args: -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64
+            artifact: Breu1176-macOS
+            cmake_args: -DCMAKE_BUILD_TYPE=Release "-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64"
             pluginval_zip: pluginval_macOS.zip
             pluginval_bin: ./pluginval.app/Contents/MacOS/pluginval
 
@@ -49,26 +49,34 @@ jobs:
       - name: Assinatura ad-hoc (macOS)
         if: runner.os == 'macOS'
         run: |
-          codesign --force --deep --sign - build/Breu_artefacts/Release/VST3/Breu.vst3
-          codesign --force --deep --sign - build/Breu_artefacts/Release/Standalone/Breu.app
+          codesign --force --deep --sign - build/Breu_artefacts/Release/VST3/Breu1176.vst3
+          codesign --force --deep --sign - build/Breu_artefacts/Release/Standalone/Breu1176.app
 
       - name: pluginval (nível 10)
         run: |
           curl -sSL -o pluginval.zip "https://github.com/Tracktion/pluginval/releases/download/${PLUGINVAL_VERSION}/${{ matrix.pluginval_zip }}"
           unzip -q pluginval.zip
           ${{ matrix.pluginval_bin }} --strictness-level 10 --validate-in-process --skip-gui-tests \
-            --output-dir pluginval-logs --validate build/Breu_artefacts/Release/VST3/Breu.vst3
+            --output-dir pluginval-logs --validate build/Breu_artefacts/Release/VST3/Breu1176.vst3
 
       - name: Empacotar
         run: |
           mkdir -p dist
-          cp -R build/Breu_artefacts/Release/VST3/Breu.vst3 dist/
+          cp -R build/Breu_artefacts/Release/VST3/Breu1176.vst3 dist/
           if [ "${{ runner.os }}" = "macOS" ]; then
-            cp -R build/Breu_artefacts/Release/Standalone/Breu.app dist/
+            cp -R build/Breu_artefacts/Release/Standalone/Breu1176.app dist/
           else
-            cp build/Breu_artefacts/Release/Standalone/Breu.exe dist/
+            cp build/Breu_artefacts/Release/Standalone/Breu1176.exe dist/
           fi
           cp docs/instalar.md dist/LEIA-ME.md
+
+      - name: Compactar preservando permissões (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          cd dist
+          ditto -c -k --sequesterRsrc --keepParent Breu1176.vst3 Breu1176-vst3.zip
+          ditto -c -k --sequesterRsrc --keepParent Breu1176.app Breu1176-app.zip
+          rm -rf Breu1176.vst3 Breu1176.app
 
       - name: Publicar plugin
         uses: actions/upload-artifact@v5
